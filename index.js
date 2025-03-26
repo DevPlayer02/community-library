@@ -1,22 +1,12 @@
 import express from 'express'
+import userRouters from './src/routes/user.routes.js'
 const app = express();
 const port = 3000;
 
 app.use(express.json());
-
-const users = []
-
-app.post('/users', (req, res) => {
-  const body = req.body
-  users.push(body)
-  res.status(201).send("User created")
-});
-
-app.get('/users', (req, res) => {
-  res.send({users})
-});
+app.use(userRouters);
 
 app.listen(port, () => {
-  console.log(`Server is running in port ${port}`)
+  console.log(`Server is running on port ${port}`)
 })
 
