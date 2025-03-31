@@ -22,9 +22,8 @@ router.get (
     userController.findUserByIdController
 )
 
-router.put (
+router.patch (
     '/users/:id',
-    validate(userSchema),
     validateUserId,
     userController.updateUserController
 )
