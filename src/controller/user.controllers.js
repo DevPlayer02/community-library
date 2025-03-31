@@ -44,9 +44,24 @@ async function updateUserController(req, res) {
     
 }
 
+async function deleteUserController(req, res) {
+    const { id } = req.params;
+
+    try {
+        const message = await userService.deleteUserService(id);
+        res.send({ message });
+    } catch (e) {
+        return res.status(400).send(e.message);
+    }
+    
+}
+
+
+
 export default{
     createUserController,
     findAllUsersController,
     findUserByIdController,
-    updateUserController
+    updateUserController,
+    deleteUserController
 }
