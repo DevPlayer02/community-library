@@ -42,7 +42,71 @@ function findAllBooksRepository() {
     })
 }
 
+function findBookByIdRepository(bookId) {
+    return new Promise((resolve, reject) => {
+        db.get(`
+                SELECT * FROM books
+                WHERE id = ?
+            `, [bookId], (err, row) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(row)
+                }
+            }
+        )
+    })
+}
+
+function updateBookRepository(bookId, updatedBook) {
+    return new Promise((resolve, reject) => {
+        console.log(updatedBook)
+        const fields = ['title', 'author', 'userId']
+        let query = "UPDATE books SET "
+        const values= [];
+
+        fields.forEach((field) => {
+            if(updatedBook[field] !== undefined) {
+                query += `${field} = ?,`;
+                values.push(updatedBook[field]);
+            }
+        });
+
+        query = query.slice(0, -1);
+
+        query += " WHERE id = ?";
+        values.push(bookId);
+
+        db.run(query, values, function(err) {
+            if(err) {
+                reject(err)
+            } else {
+                resolve({ id: bookId, ...updatedBook})
+            }
+        })
+    })
+}
+
+function deleteBookRepository(bookId) {
+    return new Promise((resolve, reject) => {
+        db.run(`
+            DELETE FROM books
+            WHERE id = ?
+            `, [bookId], (err) => {
+                if(err) {
+                    reject(err)
+                } else {
+                    resolve(null)
+                }
+            }
+        )
+    })
+}
+
 export default { 
     createBookRepositoty,
-    findAllBooksRepository
+    findAllBooksRepository,
+    findBookByIdRepository,
+    updateBookRepository,
+    deleteBookRepository
 }
