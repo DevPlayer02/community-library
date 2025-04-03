@@ -22,7 +22,49 @@ async function findAllBooksController(req, res) {
     }
 }
 
+async function findBookByIdController(req, res) {
+    try {
+        const bookId = req.params.id;
+        const book = await bookService.findBookByIdService(bookId);
+        res.send(book);
+    } catch (error) {
+        res.status(404).send(error.message);
+    }
+}
+
+async function updateBookController(req, res) {
+    const updatedBook = req.body;
+    const bookId = req.params.id;
+    const userId = req.userId;
+
+    try {
+        const response = await bookService.updateBookService(
+            updatedBook,
+            bookId,
+            userId
+        )
+        res.send(response);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+async function deleteBookController(req, res) {
+    const bookId = req.params.id;
+    const userId = req.userId;
+
+    try {
+        const response = await bookService.deleteBookService(bookId, userId);
+        res.send(response);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 export default {
     createBookController,
-    findAllBooksController
+    findAllBooksController,
+    findBookByIdController,
+    updateBookController,
+    deleteBookController
 }
