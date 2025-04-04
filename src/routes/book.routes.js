@@ -18,6 +18,10 @@ router.post(
     bookController.createBookController
 );
 router.get(
+    "/books/search",
+    bookController.searchBooksController
+);
+router.get(
     "/books/:id",
     validateBookId,
     bookController.findBookByIdController
