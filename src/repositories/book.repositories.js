@@ -58,10 +58,9 @@ function findBookByIdRepository(bookId) {
     })
 }
 
-function updateBookRepository(bookId, updatedBook) {
+function updateBookRepository(updatedBook, bookId) {
     return new Promise((resolve, reject) => {
-        console.log(updatedBook)
-        const fields = ['title', 'author', 'userId']
+        const fields = ["title", "author", "userId"];
         let query = "UPDATE books SET "
         const values= [];
 
@@ -81,7 +80,7 @@ function updateBookRepository(bookId, updatedBook) {
             if(err) {
                 reject(err)
             } else {
-                resolve({ id: bookId, ...updatedBook})
+                resolve({ ...updatedBook, id: bookId})
             }
         })
     })

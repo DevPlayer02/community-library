@@ -25,7 +25,6 @@ router.get(
 router.patch(
     "/books/:id",
     validateBookId,
-    validate(bookSchema),
     bookController.updateBookController
 )
 router.delete(
