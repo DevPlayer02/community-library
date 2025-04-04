@@ -43,7 +43,7 @@ async function updateBookController(req, res) {
             bookId,
             userId
         )
-        res.send(response);
+        return res.send(response);
     } catch (error) {
         res.status(400).send(error.message);
     }

@@ -17,10 +17,11 @@ async function findBookByIdService(bookId) {
     return book;
 }
 
-async function updateBookService(bookId, updatedBook) {
-    const book = await bookRepository.updateBookRepository(bookId);
+async function updateBookService(updatedBook, bookId, userId) {
+    const book = await bookRepository.findBookByIdRepository(bookId);
     if(!book) throw new Error('Book not found');
     if(book.userId !== userId) throw new Error('Unauthorized');
+
     const response = await bookRepository.updateBookRepository(
         updatedBook,
         bookId
