@@ -1,12 +1,15 @@
 import express from 'express'
-const app = express();
-const port = 3000;
+import { routers } from './src/routes/index.js'
+import "dotenv/config.js";
+import "./src/service/cron.service.js";
 
-app.get('/', (req, res) => {
-  res.send('Olá Mundo!')
-})
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(routers);
 
 app.listen(port, () => {
-  console.log(`Server is running in port ${port}`)
+  console.log(`Server is running on port ${port}`)
 })
 
