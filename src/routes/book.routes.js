@@ -7,32 +7,32 @@ import { bookSchema } from "../schema/book.schema.js";
 const router = Router();
 
 router.get(
-    "/books",
+    "/",
     bookController.findAllBooksController
 );
 
 router.use(authMiddleware);
 router.post(
-    "/books", 
+    "/", 
     validate(bookSchema), 
     bookController.createBookController
 );
 router.get(
-    "/books/search",
+    "/search",
     bookController.searchBooksController
 );
 router.get(
-    "/books/:id",
+    "/:id",
     validateBookId,
     bookController.findBookByIdController
 );
 router.patch(
-    "/books/:id",
+    "/:id",
     validateBookId,
     bookController.updateBookController
 )
 router.delete(
-    "/books/:id",
+    "/:id",
     validateBookId,
     bookController.deleteBookController
 )

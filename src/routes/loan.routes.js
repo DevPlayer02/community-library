@@ -6,21 +6,21 @@ import { loanSchema } from '../schema/loan.schema.js';
 const router = Router();
 
 router.post(
-    "/loans",
+    "/",
     validate(loanSchema),
     loanController.createLoanController
 )
 router.get(
-    "/loans",
+    "/",
     loanController.findAllLoansController
 )
 router.get(
-    "/loans/:id",
+    "/:id",
     validateLoanId,
     loanController.findLoanByIdController
 )
 router.delete(
-    "/loans/:id",
+    "/:id",
     validateLoanId,
     loanController.deleteLoanController
 )

@@ -20,24 +20,24 @@ router.post(
 router.use(authMiddleware);
 
 router.get(
-    '/users',
+    '/',
     userController.findAllUsersController
 );
 
 router.get (
-    '/users/:id',
+    '/:id',
     validateUserId,
     userController.findUserByIdController
 )
 
 router.patch (
-    '/users/:id',
+    '/:id',
     validateUserId,
     userController.updateUserController
 )
 
 router.delete (
-    '/users/:id',
+    '/:id',
     validateUserId,
     userController.deleteUserController
 )
