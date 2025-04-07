@@ -14,9 +14,9 @@ function sendEmail(email, username, bookTitle, dueDate) {
         from: process.env.GMAIL_USER,
         to: email,
         subject: 'Remider: Book Due Date Approaching',
-        html: `]
+        html: `
             <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
-                <h2 style="coloer: #f60;"> Community Library Reminder </h2>
+                <h2 style="color: #f60;"> Community Library Reminder </h2>
                 <p> Dear ${username}, </p>
                 <p> This is a reminder that the book <strong> "${bookTitle}" </strong> is due on <strong> "${dueDate}" </strong>. </p>
                 <p> Please make sure to return or renew it on time. </p>
@@ -34,6 +34,4 @@ function sendEmail(email, username, bookTitle, dueDate) {
     });
 }
 
-export default {
-    sendEmail,
-}
+export default sendEmail;
